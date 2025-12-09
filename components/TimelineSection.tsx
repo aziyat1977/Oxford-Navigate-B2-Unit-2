@@ -63,7 +63,7 @@ const TimelineSection: React.FC = () => {
   const checkVocab = () => setShowVocabResult(true);
 
   // --- COMPONENTS ---
-  const InlineInput = ({ id, answers, setAnswers, showResult, correctMap, width = "w-24" }: any) => {
+  const InlineInput = ({ id, answers, setAnswers, showResult, correctMap, width = "w-48" }: any) => {
     const val = answers[id] || "";
     // Robust logic to handle "by the time (that)" vs "by the time"
     const correctVal = correctMap[id].toLowerCase().replace('(that)', '').trim();
@@ -82,7 +82,7 @@ const TimelineSection: React.FC = () => {
             type="text" 
             value={val}
             onChange={(e) => setAnswers({...answers, [id]: e.target.value})}
-            className={`bg-transparent border-b ${isCorrect ? 'border-green-500 text-green-400' : isWrong ? 'border-red-500 text-red-400' : 'border-gray-600 focus:border-lux-gold'} text-center outline-none mx-1 text-lux-cream ${width}`}
+            className={`bg-transparent border-b-4 ${isCorrect ? 'border-green-500 text-green-400' : isWrong ? 'border-red-500 text-red-400' : 'border-gray-600 focus:border-lux-gold'} text-center outline-none mx-2 text-lux-cream text-3xl h-16 font-serif placeholder-white/10 ${width}`}
         />
     );
   };
@@ -96,74 +96,82 @@ const TimelineSection: React.FC = () => {
         <select
             value={val}
             onChange={(e) => setAnswers({...answers, [id]: e.target.value})}
-            className={`bg-transparent border-b cursor-pointer py-0.5 mx-1 focus:outline-none transition-colors appearance-none font-bold
+            className={`bg-transparent border-b-4 cursor-pointer py-2 mx-2 focus:outline-none transition-colors appearance-none font-bold text-3xl
                 ${isCorrect ? 'border-green-500 text-green-400' : isWrong ? 'border-red-500 text-red-400' : 'border-lux-gold text-lux-gold'}`}
         >
             <option value="" disabled className="bg-black text-gray-500">Select...</option>
             {options.map((opt: string) => (
-                <option key={opt} value={opt} className="bg-black text-lux-cream">{opt}</option>
+                <option key={opt} value={opt} className="bg-black text-lux-cream text-2xl">{opt}</option>
             ))}
         </select>
       );
   };
 
   return (
-    <section className="py-24 px-4 md:px-12 lg:px-24 bg-lux-black text-lux-gray relative">
-        <div className="max-w-5xl mx-auto space-y-24">
+    <section className="py-32 px-8 lg:px-24 bg-lux-black text-lux-gray relative">
+        <div className="max-w-[95%] mx-auto space-y-32">
             
             <FadeIn>
-                <h2 className="font-serif text-4xl md:text-5xl text-center text-lux-cream mb-4">Sequencing the Lie</h2>
-                <p className="text-center text-lux-gold uppercase tracking-widest text-sm">Unit 2.2 Grammar & Vocabulary</p>
+                <h2 className="font-serif text-7xl md:text-8xl text-center text-lux-cream mb-6">Sequencing the Lie</h2>
+                <div className="flex justify-center">
+                    <div className="h-2 w-64 bg-lux-gold"></div>
+                </div>
+                <p className="text-center text-lux-gold uppercase tracking-[0.3em] text-2xl mt-8">Unit 2.2 Grammar & Vocabulary</p>
             </FadeIn>
 
             {/* EXERCISE 5: BALLOON BOY CLOZE */}
             <FadeIn delay={100}>
-                <div className="bg-[#111] p-8 rounded-lg border border-white/10 shadow-2xl">
-                    <h3 className="font-serif text-2xl text-lux-cream mb-6 flex justify-between items-center">
+                <div className="bg-[#111] p-16 rounded-[3rem] border border-white/10 shadow-2xl">
+                    <h3 className="font-serif text-5xl text-lux-cream mb-12 flex justify-between items-center border-b border-white/10 pb-8">
                         <span>The Balloon Boy Story</span>
-                        <span className="text-xs font-sans text-gray-500 uppercase tracking-widest">Exercise 5a</span>
+                        <span className="text-2xl font-sans text-gray-500 uppercase tracking-widest border border-gray-600 px-6 py-2 rounded-full">Exercise 5a</span>
                     </h3>
                     
-                    <div className="bg-black/50 p-4 mb-8 rounded text-sm text-lux-gold font-mono text-center flex flex-wrap justify-center gap-4">
-                        <span>as soon as</span><span>by the time (that)</span><span>during</span><span>meanwhile</span><span>until</span><span>while</span>
+                    <div className="bg-black/50 p-8 mb-16 rounded-2xl text-2xl text-lux-gold font-mono text-center flex flex-wrap justify-center gap-8 border border-white/5">
+                        <span className="bg-white/5 px-4 py-2 rounded">as soon as</span>
+                        <span className="bg-white/5 px-4 py-2 rounded">by the time (that)</span>
+                        <span className="bg-white/5 px-4 py-2 rounded">during</span>
+                        <span className="bg-white/5 px-4 py-2 rounded">meanwhile</span>
+                        <span className="bg-white/5 px-4 py-2 rounded">until</span>
+                        <span className="bg-white/5 px-4 py-2 rounded">while</span>
                     </div>
 
-                    <div className="space-y-6 leading-loose font-light text-lg">
+                    <div className="space-y-12 leading-loose font-light text-3xl text-gray-300">
                         <p>
-                            <span className="text-lux-gold font-serif mr-2">1.</span>
+                            <span className="text-lux-gold font-serif mr-4 font-bold text-4xl">1.</span>
                             A couple, Richard and Mayumi Heene, let a large gas balloon float off into the air and then, 
-                            <InlineInput id={1} answers={balloonAnswers} setAnswers={setBalloonAnswers} showResult={showBalloonResult} correctMap={correctBalloon} width="w-32" /> 
+                            <InlineInput id={1} answers={balloonAnswers} setAnswers={setBalloonAnswers} showResult={showBalloonResult} correctMap={correctBalloon} width="w-64" /> 
                             it was high in the sky, they claimed that their six-year-old son was inside the balloon.
                         </p>
                         <p>
-                            <span className="text-lux-gold font-serif mr-2">2.</span>
+                            <span className="text-lux-gold font-serif mr-4 font-bold text-4xl">2.</span>
                             The police were informed and helicopters were sent up to track the balloon
                             <InlineInput id={2} answers={balloonAnswers} setAnswers={setBalloonAnswers} showResult={showBalloonResult} correctMap={correctBalloon} /> 
                             they could find a safe way of getting him down.
                         </p>
                         <p>
-                            <span className="text-lux-gold font-serif mr-2">3.</span>
-                            <InlineInput id={3} answers={balloonAnswers} setAnswers={setBalloonAnswers} showResult={showBalloonResult} correctMap={correctBalloon} width="w-32" /> 
+                            <span className="text-lux-gold font-serif mr-4 font-bold text-4xl">3.</span>
+                            <InlineInput id={3} answers={balloonAnswers} setAnswers={setBalloonAnswers} showResult={showBalloonResult} correctMap={correctBalloon} width="w-64" /> 
                             the balloon landed an hour or so later, about 80 km away, the story was live on television.
                         </p>
                          <p>
-                            <span className="text-lux-gold font-serif mr-2">4.</span>
+                            <span className="text-lux-gold font-serif mr-4 font-bold text-4xl">4.</span>
                             When the boy was not found inside, the media reported that he had fallen out
                             <InlineInput id={4} answers={balloonAnswers} setAnswers={setBalloonAnswers} showResult={showBalloonResult} correctMap={correctBalloon} /> 
                             the flight, and a huge search started.
-                            <InlineInput id={5} answers={balloonAnswers} setAnswers={setBalloonAnswers} showResult={showBalloonResult} correctMap={correctBalloon} width="w-32" /> 
+                            <InlineInput id={5} answers={balloonAnswers} setAnswers={setBalloonAnswers} showResult={showBalloonResult} correctMap={correctBalloon} width="w-64" /> 
                             , the boy was actually safe at home, hiding.
                         </p>
                         <p>
-                            <span className="text-lux-gold font-serif mr-2">5.</span>
+                            <span className="text-lux-gold font-serif mr-4 font-bold text-4xl">5.</span>
                             We can't say for sure because the couple never admitted it, but
                             <InlineInput id={6} answers={balloonAnswers} setAnswers={setBalloonAnswers} showResult={showBalloonResult} correctMap={correctBalloon} /> 
                             reporters were interviewing the family on TV, the boy accidentally mentioned that they'd done it to be on TV.
                         </p>
                     </div>
 
-                    <div className="mt-8 flex justify-end">
-                        <button onClick={checkBalloon} className="px-6 py-2 border border-lux-gold text-lux-gold hover:bg-lux-gold hover:text-black transition-all uppercase tracking-widest text-sm">
+                    <div className="mt-16 flex justify-end">
+                        <button onClick={checkBalloon} className="px-12 py-6 border-4 border-lux-gold text-lux-gold hover:bg-lux-gold hover:text-black transition-all uppercase tracking-widest text-2xl font-bold rounded-xl">
                             Check Answers
                         </button>
                     </div>
@@ -172,9 +180,12 @@ const TimelineSection: React.FC = () => {
 
             {/* EXERCISE 6: GRAMMAR FOCUS */}
             <FadeIn delay={200}>
-                <div className="border border-lux-gold/30 p-8 rounded bg-gradient-to-br from-[#1a1a1a] to-black">
-                     <h3 className="font-serif text-3xl text-lux-gold mb-8 text-center">Grammar Focus: Time Linkers</h3>
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm md:text-base">
+                <div className="border-4 border-lux-gold/30 p-16 rounded-[3rem] bg-gradient-to-br from-[#1a1a1a] to-black relative overflow-hidden">
+                     {/* Decorative background element */}
+                     <div className="absolute top-0 right-0 w-96 h-96 bg-lux-gold opacity-5 rounded-full blur-[100px] pointer-events-none"></div>
+
+                     <h3 className="font-serif text-5xl text-lux-gold mb-16 text-center">Grammar Focus: Time Linkers</h3>
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-2xl">
                         {[
                             { id: 1, text: "describes when something happened but not for how long", options: ["while", "until"] },
                             { id: 2, text: "describes an event that happens immediately after an event", options: ["as soon as", "by the time"] },
@@ -183,22 +194,20 @@ const TimelineSection: React.FC = () => {
                             { id: 5, text: "describes an action that happens at a point within this period", options: ["during", "as soon as"] },
                             { id: 6, text: "describes an action that continued up to a point and then stops", options: ["until", "during"] }
                         ].map((rule) => {
-                             const isCorrect = showRuleResult && ruleAnswers[rule.id] === correctRules[rule.id as keyof typeof correctRules];
-                             const isWrong = showRuleResult && ruleAnswers[rule.id] && ruleAnswers[rule.id] !== correctRules[rule.id as keyof typeof correctRules];
                              return (
-                                <div key={rule.id} className="flex justify-between items-center p-4 bg-white/5 rounded">
-                                    <span className="text-gray-400 w-2/3">{rule.text}</span>
-                                    <div className="flex flex-col gap-2">
+                                <div key={rule.id} className="flex flex-col gap-6 p-8 bg-white/5 rounded-3xl border border-white/5">
+                                    <span className="text-gray-300 leading-snug">{rule.text}</span>
+                                    <div className="flex gap-4 mt-auto">
                                         {rule.options.map(opt => (
                                             <button 
                                                 key={opt}
                                                 onClick={() => setRuleAnswers({...ruleAnswers, [rule.id]: opt})}
-                                                className={`px-3 py-1 text-xs border rounded transition-colors 
+                                                className={`flex-1 py-4 text-xl font-bold border-2 rounded-xl transition-colors uppercase tracking-wider
                                                     ${ruleAnswers[rule.id] === opt 
                                                         ? (showRuleResult 
                                                             ? (opt === correctRules[rule.id as keyof typeof correctRules] ? 'bg-green-600 border-green-600 text-white' : 'bg-red-600 border-red-600 text-white')
                                                             : 'bg-lux-gold text-black border-lux-gold')
-                                                        : 'border-gray-600 text-gray-400 hover:border-lux-gold'}
+                                                        : 'border-gray-600 text-gray-500 hover:border-lux-gold hover:text-white'}
                                                 `}
                                             >
                                                 {opt}
@@ -209,8 +218,8 @@ const TimelineSection: React.FC = () => {
                              )
                         })}
                      </div>
-                     <div className="mt-8 flex justify-center">
-                        <button onClick={checkRules} className="px-6 py-2 border border-lux-gold text-lux-gold hover:bg-lux-gold hover:text-black transition-all uppercase tracking-widest text-sm">
+                     <div className="mt-16 flex justify-center">
+                        <button onClick={checkRules} className="px-12 py-6 border-4 border-lux-gold text-lux-gold hover:bg-lux-gold hover:text-black transition-all uppercase tracking-widest text-2xl font-bold rounded-xl">
                             Check Rules
                         </button>
                     </div>
@@ -219,11 +228,11 @@ const TimelineSection: React.FC = () => {
 
             {/* EXERCISE 7a: PILTDOWN MAN */}
             <FadeIn delay={300}>
-                <div className="bg-[#151515] p-8 md:p-12 rounded-lg border border-white/5 shadow-2xl">
-                     <h3 className="font-serif text-2xl text-lux-cream mb-2">The Piltdown Man</h3>
-                     <p className="text-xs font-sans text-gray-500 uppercase tracking-widest mb-8">Exercise 7a: Choose the best time linker</p>
+                <div className="bg-[#151515] p-16 rounded-[3rem] border border-white/5 shadow-2xl">
+                     <h3 className="font-serif text-5xl text-lux-cream mb-4">The Piltdown Man</h3>
+                     <p className="text-xl font-sans text-gray-500 uppercase tracking-widest mb-12">Exercise 7a: Choose the best time linker</p>
 
-                     <div className="prose prose-invert prose-lg max-w-none font-light">
+                     <div className="prose prose-invert prose-2xl max-w-none font-light leading-loose text-gray-300">
                         <p>
                             <InlineSelect id={1} options={['During', 'While']} answers={piltdownAnswers} setAnswers={setPiltdownAnswers} showResult={showPiltdownResult} correctMap={correctPiltdown} />
                             the early twentieth century, scientists were keen to find some evidence that would prove the link between early man and apes. In 1912 that evidence seemed to have been found
@@ -250,8 +259,8 @@ const TimelineSection: React.FC = () => {
                          </p>
                      </div>
 
-                    <div className="mt-8 flex justify-end">
-                        <button onClick={checkPiltdown} className="px-6 py-2 border border-lux-gold text-lux-gold hover:bg-lux-gold hover:text-black transition-all uppercase tracking-widest text-sm">
+                    <div className="mt-16 flex justify-end">
+                        <button onClick={checkPiltdown} className="px-12 py-6 border-4 border-lux-gold text-lux-gold hover:bg-lux-gold hover:text-black transition-all uppercase tracking-widest text-2xl font-bold rounded-xl">
                             Check Story
                         </button>
                     </div>
@@ -260,35 +269,35 @@ const TimelineSection: React.FC = () => {
 
             {/* EXERCISE 8b: VOCABULARY */}
             <FadeIn delay={400}>
-                <div className="border-t border-white/10 pt-16">
-                    <h3 className="font-serif text-3xl text-lux-gold mb-8">Vocabulary & Speaking</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="border-t border-white/10 pt-32">
+                    <h3 className="font-serif text-5xl text-lux-gold mb-16">Vocabulary & Speaking</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                         
                         {/* Box 1 */}
-                        <div className="bg-white/5 p-6 rounded border-l-4 border-blue-500">
-                             <div className="text-xs text-blue-400 mb-4 uppercase font-bold tracking-wider">announce • claim • interview • mention • tell</div>
-                             <p className="leading-relaxed">
-                                Police (1) <InlineInput id={1} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-24" />
-                                yesterday that calls to the emergency 999 number had risen sharply. They (2) <InlineInput id={2} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-20" />
-                                the public to ignore a hoax story which (3) <InlineInput id={3} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-24" />
+                        <div className="bg-white/5 p-12 rounded-[2rem] border-l-8 border-blue-500">
+                             <div className="text-xl text-blue-400 mb-8 uppercase font-bold tracking-wider">announce • claim • interview • mention • tell</div>
+                             <p className="leading-loose text-3xl font-light">
+                                Police (1) <InlineInput id={1} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-48" />
+                                yesterday that calls to the emergency 999 number had risen sharply. They (2) <InlineInput id={2} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-32" />
+                                the public to ignore a hoax story which (3) <InlineInput id={3} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-48" />
                                 that dialling 999 will charge your phone battery.
                              </p>
                         </div>
 
                         {/* Box 2 */}
-                        <div className="bg-white/5 p-6 rounded border-l-4 border-amber-500">
-                             <div className="text-xs text-amber-500 mb-4 uppercase font-bold tracking-wider">admit • inform • invent • keep quiet • report</div>
-                             <p className="leading-relaxed">
-                                The newspaper which recently (4) <InlineInput id={4} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-24" />
-                                that Beijing was showing digital sunrises on huge screens because air pollution was too bad has now (5) <InlineInput id={5} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-24" />
-                                that a journalist actually (6) <InlineInput id={6} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-24" />
+                        <div className="bg-white/5 p-12 rounded-[2rem] border-l-8 border-amber-500">
+                             <div className="text-xl text-amber-500 mb-8 uppercase font-bold tracking-wider">admit • inform • invent • keep quiet • report</div>
+                             <p className="leading-loose text-3xl font-light">
+                                The newspaper which recently (4) <InlineInput id={4} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-48" />
+                                that Beijing was showing digital sunrises on huge screens because air pollution was too bad has now (5) <InlineInput id={5} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-48" />
+                                that a journalist actually (6) <InlineInput id={6} answers={vocabAnswers} setAnswers={setVocabAnswers} showResult={showVocabResult} correctMap={correctVocab} width="w-48" />
                                 the story.
                              </p>
                         </div>
 
                     </div>
-                    <div className="mt-8 flex justify-center">
-                        <button onClick={checkVocab} className="px-8 py-3 bg-lux-gold text-black font-sans uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                    <div className="mt-24 flex justify-center">
+                        <button onClick={checkVocab} className="px-16 py-8 bg-lux-gold text-black font-sans text-3xl font-bold uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_50px_rgba(212,175,55,0.3)] rounded-2xl">
                             Check Vocabulary
                         </button>
                     </div>

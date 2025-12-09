@@ -5,17 +5,21 @@ import GrammarSection from './components/GrammarSection';
 import HoaxSection from './components/HoaxSection';
 import TimelineSection from './components/TimelineSection';
 import Footer from './components/Footer';
+import StudentHandout from './components/StudentHandout';
 
 const App: React.FC = () => {
   return (
-    <div className="w-full min-h-screen overflow-x-hidden bg-lux-black selection:bg-lux-gold selection:text-black">
-      <Hero />
-      <NarrativeSection />
-      <GrammarSection />
-      <HoaxSection />
-      <TimelineSection />
-      <Footer />
-    </div>
+    <>
+      <div className="print:hidden w-full min-h-screen overflow-x-hidden bg-lux-black selection:bg-lux-gold selection:text-black">
+        <Hero />
+        <NarrativeSection />
+        <GrammarSection />
+        <HoaxSection />
+        <TimelineSection />
+        <Footer />
+      </div>
+      <StudentHandout />
+    </>
   );
 };
 

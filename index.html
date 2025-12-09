@@ -13,6 +13,10 @@
       tailwind.config = {
         theme: {
           extend: {
+            screens: {
+              '3xl': '1920px', // Standard 1080p Smartboard width
+              '4xl': '2560px', // 4K Smartboard
+            },
             colors: {
               'lux-black': '#050505',
               'lux-charcoal': '#1a1a1a',
@@ -35,20 +39,22 @@
         body {
             background-color: #050505;
             color: #e0e0e0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            font-size: 18px; /* Base size increase */
         }
-        /* Custom scrollbar for aesthetics */
+        /* Hide scrollbar for presentation aesthetics */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 0px;
+            background: transparent;
         }
-        ::-webkit-scrollbar-track {
-            background: #050505;
+        
+        select {
+            background-image: none; /* Remove default arrow */
         }
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #d4af37;
+        
+        /* Smooth scrolling for anchor jumps */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
   <script type="importmap">
