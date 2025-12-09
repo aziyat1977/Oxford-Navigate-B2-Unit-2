@@ -8,6 +8,7 @@ const TimelineSection: React.FC = () => {
   
   // Ex 6 State
   const [ruleAnswers, setRuleAnswers] = useState<{ [key: number]: string }>({});
+  const [showRuleResult, setShowRuleResult] = useState(false);
   
   // Ex 7a State
   const [piltdownAnswers, setPiltdownAnswers] = useState<{ [key: number]: string }>({});
@@ -26,6 +27,15 @@ const TimelineSection: React.FC = () => {
     5: 'meanwhile',
     6: 'while'
   };
+
+  const correctRules = {
+      1: 'while',
+      2: 'as soon as',
+      3: 'meanwhile',
+      4: 'by the time',
+      5: 'during',
+      6: 'until'
+  }
 
   const correctPiltdown = {
     1: 'During',
@@ -48,13 +58,23 @@ const TimelineSection: React.FC = () => {
 
   // --- HANDLERS ---
   const checkBalloon = () => setShowBalloonResult(true);
+  const checkRules = () => setShowRuleResult(true);
   const checkPiltdown = () => setShowPiltdownResult(true);
   const checkVocab = () => setShowVocabResult(true);
 
   // --- COMPONENTS ---
   const InlineInput = ({ id, answers, setAnswers, showResult, correctMap, width = "w-24" }: any) => {
     const val = answers[id] || "";
-    const isCorrect = showResult && val.toLowerCase().trim() === correctMap[id].toLowerCase().replace('(that)', '').trim();
+    // Robust logic to handle "by the time (that)" vs "by the time"
+    const correctVal = correctMap[id].toLowerCase().replace('(that)', '').trim();
+    const userVal = val.toLowerCase().trim();
+    
+    // Check if user included 'that' appropriately or omitted it
+    const isCorrect = showResult && (
+        userVal === correctVal || 
+        userVal === correctMap[id].toLowerCase().replace('(', '').replace(')', '') // matches "by the time that"
+    );
+    
     const isWrong = showResult && !isCorrect;
 
     return (
@@ -162,23 +182,38 @@ const TimelineSection: React.FC = () => {
                             { id: 4, text: "describes an action that happened before the main events", options: ["by the time", "during"] },
                             { id: 5, text: "describes an action that happens at a point within this period", options: ["during", "as soon as"] },
                             { id: 6, text: "describes an action that continued up to a point and then stops", options: ["until", "during"] }
-                        ].map((rule) => (
-                            <div key={rule.id} className="flex justify-between items-center p-4 bg-white/5 rounded">
-                                <span className="text-gray-400 w-2/3">{rule.text}</span>
-                                <div className="flex flex-col gap-2">
-                                    {rule.options.map(opt => (
-                                        <button 
-                                            key={opt}
-                                            onClick={() => setRuleAnswers({...ruleAnswers, [rule.id]: opt})}
-                                            className={`px-3 py-1 text-xs border rounded transition-colors ${ruleAnswers[rule.id] === opt ? 'bg-lux-gold text-black border-lux-gold' : 'border-gray-600 text-gray-400 hover:border-lux-gold'}`}
-                                        >
-                                            {opt}
-                                        </button>
-                                    ))}
+                        ].map((rule) => {
+                             const isCorrect = showRuleResult && ruleAnswers[rule.id] === correctRules[rule.id as keyof typeof correctRules];
+                             const isWrong = showRuleResult && ruleAnswers[rule.id] && ruleAnswers[rule.id] !== correctRules[rule.id as keyof typeof correctRules];
+                             return (
+                                <div key={rule.id} className="flex justify-between items-center p-4 bg-white/5 rounded">
+                                    <span className="text-gray-400 w-2/3">{rule.text}</span>
+                                    <div className="flex flex-col gap-2">
+                                        {rule.options.map(opt => (
+                                            <button 
+                                                key={opt}
+                                                onClick={() => setRuleAnswers({...ruleAnswers, [rule.id]: opt})}
+                                                className={`px-3 py-1 text-xs border rounded transition-colors 
+                                                    ${ruleAnswers[rule.id] === opt 
+                                                        ? (showRuleResult 
+                                                            ? (opt === correctRules[rule.id as keyof typeof correctRules] ? 'bg-green-600 border-green-600 text-white' : 'bg-red-600 border-red-600 text-white')
+                                                            : 'bg-lux-gold text-black border-lux-gold')
+                                                        : 'border-gray-600 text-gray-400 hover:border-lux-gold'}
+                                                `}
+                                            >
+                                                {opt}
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                             )
+                        })}
                      </div>
+                     <div className="mt-8 flex justify-center">
+                        <button onClick={checkRules} className="px-6 py-2 border border-lux-gold text-lux-gold hover:bg-lux-gold hover:text-black transition-all uppercase tracking-widest text-sm">
+                            Check Rules
+                        </button>
+                    </div>
                 </div>
             </FadeIn>
 

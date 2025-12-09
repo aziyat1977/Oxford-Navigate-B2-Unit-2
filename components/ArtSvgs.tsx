@@ -146,7 +146,7 @@ export const SkullSvg = () => (
 
     {/* Background Context */}
     <rect width="600" height="400" fill="#121212" />
-    <circle cx="300" cy="200" r="150" fill="#lux-gold" opacity="0.05" filter="blur(40px)" />
+    <circle cx="300" cy="200" r="150" fill="#d4af37" opacity="0.05" filter="blur(40px)" />
 
     {/* Skull Shape (Profile) */}
     <g transform="translate(300, 200) scale(1.2)">

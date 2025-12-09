@@ -18,8 +18,13 @@ const NarrativeSection: React.FC = () => {
   };
 
   const correctVocabAnswers = {
-    1: 'realize', 2: 'remember', 3: 'wondering', 
-    4: 'believe', 5: 'recognized', 6: 'remind', 7: 'expect'
+    1: ['realize'], 
+    2: ['remember', 'remembers', 'remembered'], // Accepted forms
+    3: ['wondering'], 
+    4: ['believe'], 
+    5: ['recognized'], 
+    6: ['remind'], 
+    7: ['expect']
   };
 
   const handleStoryChange = (id: number, val: string) => {
@@ -52,6 +57,12 @@ const NarrativeSection: React.FC = () => {
         <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-xs opacity-50">▼</span>
       </span>
     );
+  };
+
+  // Helper for vocab input
+  const checkVocabInput = (id: number, val: string) => {
+      const answers = correctVocabAnswers[id as keyof typeof correctVocabAnswers];
+      return answers.includes(val.toLowerCase().trim());
   };
 
   return (
@@ -132,7 +143,7 @@ const NarrativeSection: React.FC = () => {
                             <span>When did the writer</span>
                             <input 
                                 type="text" 
-                                className={`bg-transparent border-b ${showVocabResults && vocabAnswers[1]?.toLowerCase() === 'realize' ? 'border-green-500 text-green-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
+                                className={`bg-transparent border-b ${showVocabResults && checkVocabInput(1, vocabAnswers[1]||'') ? 'border-green-500 text-green-400' : showVocabResults ? 'border-red-500 text-red-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
                                 onChange={(e) => setVocabAnswers(prev => ({...prev, 1: e.target.value}))}
                             />
                             <span>that his head was inside a hippo?</span>
@@ -144,13 +155,13 @@ const NarrativeSection: React.FC = () => {
                             <span>Why do you think the writer</span>
                             <input 
                                 type="text" 
-                                className={`bg-transparent border-b ${showVocabResults && vocabAnswers[2]?.toLowerCase() === 'remember' ? 'border-green-500 text-green-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
+                                className={`bg-transparent border-b ${showVocabResults && checkVocabInput(2, vocabAnswers[2]||'') ? 'border-green-500 text-green-400' : showVocabResults ? 'border-red-500 text-red-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
                                 onChange={(e) => setVocabAnswers(prev => ({...prev, 2: e.target.value}))}
                             />
                             <span>so clearly what he was seeing and</span>
                              <input 
                                 type="text" 
-                                className={`bg-transparent border-b ${showVocabResults && vocabAnswers[3]?.toLowerCase() === 'wondering' ? 'border-green-500 text-green-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
+                                className={`bg-transparent border-b ${showVocabResults && checkVocabInput(3, vocabAnswers[3]||'') ? 'border-green-500 text-green-400' : showVocabResults ? 'border-red-500 text-red-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
                                 onChange={(e) => setVocabAnswers(prev => ({...prev, 3: e.target.value}))}
                             />
                             <span>about while he was underwater?</span>
@@ -162,19 +173,19 @@ const NarrativeSection: React.FC = () => {
                             <span>Do you</span>
                             <input 
                                 type="text" 
-                                className={`bg-transparent border-b ${showVocabResults && vocabAnswers[4]?.toLowerCase() === 'believe' ? 'border-green-500 text-green-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
+                                className={`bg-transparent border-b ${showVocabResults && checkVocabInput(4, vocabAnswers[4]||'') ? 'border-green-500 text-green-400' : showVocabResults ? 'border-red-500 text-red-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
                                 onChange={(e) => setVocabAnswers(prev => ({...prev, 4: e.target.value}))}
                             />
                             <span>the writer really</span>
                              <input 
                                 type="text" 
-                                className={`bg-transparent border-b ${showVocabResults && vocabAnswers[5]?.toLowerCase() === 'recognized' ? 'border-green-500 text-green-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
+                                className={`bg-transparent border-b ${showVocabResults && checkVocabInput(5, vocabAnswers[5]||'') ? 'border-green-500 text-green-400' : showVocabResults ? 'border-red-500 text-red-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
                                 onChange={(e) => setVocabAnswers(prev => ({...prev, 5: e.target.value}))}
                             />
                             <span>the same hippo, or did it just</span>
                              <input 
                                 type="text" 
-                                className={`bg-transparent border-b ${showVocabResults && vocabAnswers[6]?.toLowerCase() === 'remind' ? 'border-green-500 text-green-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
+                                className={`bg-transparent border-b ${showVocabResults && checkVocabInput(6, vocabAnswers[6]||'') ? 'border-green-500 text-green-400' : showVocabResults ? 'border-red-500 text-red-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
                                 onChange={(e) => setVocabAnswers(prev => ({...prev, 6: e.target.value}))}
                             />
                             <span>him of the attack?</span>
@@ -186,7 +197,7 @@ const NarrativeSection: React.FC = () => {
                             <span>Did you</span>
                             <input 
                                 type="text" 
-                                className={`bg-transparent border-b ${showVocabResults && vocabAnswers[7]?.toLowerCase() === 'expect' ? 'border-green-500 text-green-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
+                                className={`bg-transparent border-b ${showVocabResults && checkVocabInput(7, vocabAnswers[7]||'') ? 'border-green-500 text-green-400' : showVocabResults ? 'border-red-500 text-red-400' : 'border-gray-600 focus:border-lux-gold'} outline-none w-32 text-center text-lux-cream`}
                                 onChange={(e) => setVocabAnswers(prev => ({...prev, 7: e.target.value}))}
                             />
                             <span>the writer to return to being a guide?</span>
